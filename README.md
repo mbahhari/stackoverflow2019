@@ -4,3 +4,11 @@ Every year Stackoverflow performs a survey for developers all around the world. 
 
 #Link to the article 
 https://medium.com/@mobahhari/scartch-the-surface-in-stackoverflow-users-survey-in-2019-9e0b00d24988
+
+
+Libraries Used:
+Counter and defaultdict from collections libraru
+pandas Library #To enigneer data
+
+import matplotlib.pyplot as plt
+In this notebook I didn't preprocess the data in the matter of drop nan value, since the columns I worked with doesn't get effected by duplicated nor nan values.
