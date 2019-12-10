@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
@@ -13118,16 +13119,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Import all necessary modules to perform analysy on the data</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span><span class="p">,</span><span class="n">defaultdict</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import all necessary modules to perform analysy on the data</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13140,8 +13137,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#load the data of 2019  survey </span>
-<span class="n">df19</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;survey_results_public.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the data of 2019 survey</span>
+<span class="n">df19</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;survey_results_public.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13197,8 +13194,8 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#check if any of the columns have a nan value more than 50 in df19 % </span>
-<span class="nb">set</span><span class="p">(</span><span class="n">df19</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df19</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check if any of the columns have a nan value more than 50 in df19 %</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">df19</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df19</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -13231,22 +13228,26 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;the following code is rename C language to CPLanguage, </span>
-<span class="sd">   so it can be categorize and not count any programing language as C language </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;the following code is rename C language to CPLanguage,</span>
+<span class="sd">   so it can be categorize and not count any programing language as C language</span>
 <span class="sd">   Also, for Java so it can&#39;t be matched with java in javascript&#39;&#39;&#39;</span>
 
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;C;&#39;</span><span class="p">,</span><span class="s1">&#39;CLanguage;&#39;</span><span class="p">)</span>
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Java ;&#39;</span><span class="p">,</span><span class="s1">&#39;JLanguage;&#39;</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;C;&#39;</span><span class="p">,</span> <span class="s1">&#39;CLanguage;&#39;</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;Java;&#39;</span><span class="p">,</span> <span class="s1">&#39;JLanguage;&#39;</span><span class="p">)</span>
 
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Java;&#39;</span><span class="p">,</span><span class="s1">&#39;JLanguage;&#39;</span><span class="p">)</span>
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;C;&#39;</span><span class="p">,</span><span class="s1">&#39;CLanguage;&#39;</span><span class="p">)</span>
-<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
-
-
-<span class="c1">#extract all the languges were chosen by each user and convert them to columns</span>
-<span class="n">languagesWorkedWith</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">languagesDesired</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;Java;&#39;</span><span class="p">,</span> <span class="s1">&#39;JLanguage;&#39;</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;C;&#39;</span><span class="p">,</span> <span class="s1">&#39;CLanguage;&#39;</span><span class="p">)</span>
+<span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+    <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="c1"># extract all the languges were chosen by each user and convert them to columns</span>
+<span class="n">languagesWorkedWith</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">languagesDesired</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13266,7 +13267,7 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#view to the extracted langauges</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># view to the extracted langauges</span>
 <span class="n">languagesWorkedWith</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -13464,20 +13465,20 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;create a function to get all the languages that usres used or desired to work with</span>
-<span class="sd">   and remove all na values &#39;&#39;&#39;</span>
-<span class="k">def</span> <span class="nf">languages</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">lang</span><span class="o">=</span><span class="p">[]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">languages</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;create a function to get all the languages that usres used or desired,</span>
+<span class="sd">    to work with and remove all na values &#39;&#39;&#39;</span>
+    <span class="n">lang</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="n">lang</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">r</span><span class="p">])</span>
-    <span class="n">lang</span><span class="o">=</span><span class="n">Counter</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
-    <span class="n">l_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lang</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span><span class="s1">&#39;Users&#39;</span><span class="p">])</span>
-    <span class="n">l_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;rows&#39;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">l_df</span><span class="o">=</span><span class="n">l_df</span><span class="p">[</span><span class="n">l_df</span><span class="o">.</span><span class="n">Language</span> <span class="o">!=</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
-    <span class="n">l_df</span><span class="o">=</span><span class="n">l_df</span><span class="p">[</span><span class="n">l_df</span><span class="o">.</span><span class="n">Language</span> <span class="o">!=</span> <span class="s1">&#39;Java&#39;</span><span class="p">]</span>
-    
+            <span class="n">lang</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">])</span>
+    <span class="n">lang</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+    <span class="n">l_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lang</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Users&#39;</span><span class="p">])</span>
+    <span class="n">l_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;rows&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">l_df</span> <span class="o">=</span> <span class="n">l_df</span><span class="p">[</span><span class="n">l_df</span><span class="o">.</span><span class="n">Language</span> <span class="o">!=</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+    <span class="n">l_df</span> <span class="o">=</span> <span class="n">l_df</span><span class="p">[</span><span class="n">l_df</span><span class="o">.</span><span class="n">Language</span> <span class="o">!=</span> <span class="s1">&#39;Java&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">l_df</span>
+    
 </pre></div>
 
     </div>
@@ -13490,8 +13491,8 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Return a Dataframe contains each lanhuage and how many users use the language</span>
-<span class="n">current_lang</span><span class="o">=</span><span class="n">languages</span><span class="p">(</span><span class="n">languagesWorkedWith</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return a Dataframe contains each lanhuage and how many users use the language</span>
+<span class="n">current_lang</span> <span class="o">=</span> <span class="n">languages</span><span class="p">(</span><span class="n">languagesWorkedWith</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13504,7 +13505,7 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a look at the languages with how many useres had worked with </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a look at the languages with how many useres had worked with</span>
 <span class="n">current_lang</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -13587,8 +13588,9 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Return a Dataframe contains each lanhuage and how many users desired to use the language</span>
-<span class="n">desired_lang</span><span class="o">=</span><span class="n">languages</span><span class="p">(</span><span class="n">languagesDesired</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39; Return a Dataframe contains each lanhuage,</span>
+<span class="sd">    and how many users desired to use the language&#39;&#39;&#39;</span>
+<span class="n">desired_lang</span> <span class="o">=</span> <span class="n">languages</span><span class="p">(</span><span class="n">languagesDesired</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13601,7 +13603,7 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a look at the languages with how many useres desried to work with </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a look at the languages with how many useres desried to work with</span>
 <span class="n">desired_lang</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -13684,22 +13686,22 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create a fucntion to plot the languages and apply them on worked with or desired to work with </span>
-<span class="k">def</span> <span class="nf">plot_lang</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
-    <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span><span class="s1">&#39;teal&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_lang</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Create a fucntion to plot the languages,</span>
+<span class="sd">   and apply them on worked with or desired to work with&#39;&#39;&#39;</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span> <span class="s1">&#39;teal&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">x</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Users</span> <span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Users</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
-       
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Sorry, an error occured : </span><span class="si">{e}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
@@ -13714,8 +13716,8 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_lang</span><span class="p">(</span><span class="n">current_lang</span><span class="p">,</span><span class="s1">&#39;Most Languages Worked with&#39;</span><span class="p">)</span>
-<span class="n">plot_lang</span><span class="p">(</span><span class="n">desired_lang</span><span class="p">,</span><span class="s1">&#39;Most Languages Desired to work  with&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_lang</span><span class="p">(</span><span class="n">current_lang</span><span class="p">,</span> <span class="s1">&#39;Most Languages Worked with&#39;</span><span class="p">)</span>
+<span class="n">plot_lang</span><span class="p">(</span><span class="n">desired_lang</span><span class="p">,</span> <span class="s1">&#39;Most Languages Desired to work  with&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13765,8 +13767,9 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#merge above dfs to one df</span>
-<span class="n">cur_des</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">current_lang</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">desired_lang</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># merge above dfs to one df</span>
+<span class="n">cur_des</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">current_lang</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">desired_lang</span><span class="p">,</span>
+                   <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13779,23 +13782,22 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;another plot by combinign both plots in one, so it will help us to see how many users willing to work with</span>
-<span class="sd">    other language   &#39;&#39;&#39;</span>
-<span class="n">width</span><span class="o">=</span><span class="mf">0.25</span>
-<span class="n">x</span><span class="o">=</span><span class="n">cur_des</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="n">cur_des</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">Users_x</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Most worked Languages&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">width</span><span class="p">,</span> <span class="n">cur_des</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">Users_y</span> <span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Desired worked Languages&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">);</span>
-
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;another plot by combinign both plots in one, so it will help us to see</span>
+<span class="sd">    how many users willing to work withother language   &#39;&#39;&#39;</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">cur_des</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="n">cur_des</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">Users_x</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Most worked Languages&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">width</span><span class="p">,</span> <span class="n">cur_des</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">Users_y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Desired worked Languages&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-        
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;WD.JPG&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13838,8 +13840,8 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># crate newdf contains only LanguageWorkedWith and LanguageDesireNextYear </span>
-<span class="n">newdf</span><span class="o">=</span><span class="n">df19</span><span class="p">[[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">,</span><span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># crate newdf contains only LanguageWorkedWith and LanguageDesireNextYear</span>
+<span class="n">newdf</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[[</span><span class="s1">&#39;LanguageWorkedWith&#39;</span><span class="p">,</span> <span class="s1">&#39;LanguageDesireNextYear&#39;</span><span class="p">]]</span>
 </pre></div>
 
     </div>
@@ -13852,14 +13854,12 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">match</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;Count all languages occured in LanguageWorkedWith columns,</span>
+<span class="sd">   and LanguageDesireNextYear by row &#39;&#39;&#39;</span>
+<span class="n">match</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">lang</span> <span class="ow">in</span> <span class="n">current_lang</span><span class="o">.</span><span class="n">Language</span><span class="p">:</span>
-  
-
-    <span class="n">match</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">newdf</span><span class="o">.</span><span class="n">LanguageWorkedWith</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">newdf</span><span class="o">.</span><span class="n">LanguageDesireNextYear</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">lang</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-            
-        
+    <span class="n">match</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">newdf</span><span class="o">.</span><span class="n">LanguageWorkedWith</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="n">newdf</span><span class="o">.</span><span class="n">LanguageDesireNextYear</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">lang</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13951,7 +13951,11 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span><span class="s1">&#39;Users&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Users&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;creat dataframe containing Lnguage and Users columns,</span>
+<span class="sd">   Users column holds the number from match dictionary above&#39;&#39;&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="s1">&#39;Users&#39;</span><span class="p">]</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Users&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14161,17 +14165,17 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>
-<span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span><span class="s1">&#39;teal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Language</span><span class="p">,</span><span class="n">data</span><span class="o">.</span><span class="n">Users</span> <span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Languages worked and desired to work with next year &#39;</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span> <span class="s1">&#39;teal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Language</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">Users</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Language&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Languages&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Languages worked and desired to work with next year &#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;WDYear.jpg&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14215,11 +14219,27 @@ memory usage: 3.4 MB
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Creat a data set that contain all user participated from the Arab Countries</span>
-<span class="sd">and perform some analysis of the most language they use and the most paid Counrty and job satisfaction</span>
+<span class="sd">and perform some analysis of the most language they use,</span>
+<span class="sd">and the most paid Counrty and job satisfaction</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">Arabic</span><span class="o">=</span><span class="n">df19</span><span class="p">[</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Saudi Arabia&#39;</span><span class="p">,</span><span class="s1">&#39;Egypt&#39;</span><span class="p">,</span><span class="s1">&#39;Bahrain&#39;</span><span class="p">,</span><span class="s1">&#39;Jordan&#39;</span><span class="p">,</span><span class="s1">&#39;Qatar&#39;</span><span class="p">,</span><span class="s1">&#39;Syrian Arab Republic&#39;</span><span class="p">,</span><span class="s1">&#39;Yemen&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;United Arab Emirates&#39;</span><span class="p">,</span><span class="s1">&#39;Kuwait&#39;</span><span class="p">,</span><span class="s1">&#39;Tunisia&#39;</span><span class="p">,</span><span class="s1">&#39;Morocco&#39;</span><span class="p">,</span><span class="s1">&#39;Algeria&#39;</span><span class="p">,</span><span class="s1">&#39;Libyan Arab Jamahiriya&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;Oman&#39;</span><span class="p">,</span><span class="s1">&#39;Lebanon&#39;</span><span class="p">,</span><span class="s1">&#39;Iraq&#39;</span><span class="p">])]</span>
+<span class="n">Arabic</span> <span class="o">=</span> <span class="n">df19</span><span class="p">[</span><span class="n">df19</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span>
+                                   <span class="p">[</span><span class="s1">&#39;Saudi Arabia&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Egypt&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Bahrain&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Jordan&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Qatar&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Syrian Arab Republic&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Yemen&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;United Arab Emirates&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Kuwait&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Tunisia&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Morocco&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Algeria&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Libyan Arab Jamahiriya&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Oman&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Lebanon&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Iraq&#39;</span><span class="p">]</span>
+                                     <span class="p">)]</span>
 </pre></div>
 
     </div>
@@ -14232,9 +14252,12 @@ memory usage: 3.4 MB
 <div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#check the number and percentage of participants from Arabic Countries in thr survey </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Participants from Arabic countries(%): {round(Arabic.shape[0]/df19.shape[0]*100,1)}%&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Participants from Arabic countries:</span><span class="si">{Arabic.shape[0]}</span><span class="s1"> out of </span><span class="si">{df19.shape[0]}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39; check the number and percentage of participants,</span>
+<span class="sd">    from Arabic Countries in thr survey &#39;&#39;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Participants from Arabic countries:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{round(Arabic.shape[0]/df19.shape[0]*100,1)}%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Participants from Arabic countries:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{Arabic.shape[0]}</span><span class="s1"> out of </span><span class="si">{df19.shape[0]}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14266,10 +14289,10 @@ Participants from Arabic countries:1342 out of 88883
 <div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#How many users by thy country</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># How many users by thy country</span>
 
-<span class="n">userByCountry</span><span class="o">=</span><span class="n">Counter</span><span class="p">(</span><span class="n">Arabic</span><span class="o">.</span><span class="n">Country</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
-<span class="n">ar</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">userByCountry</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span><span class="s1">&#39;Users&#39;</span><span class="p">])</span>
+<span class="n">userByCountry</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">Arabic</span><span class="o">.</span><span class="n">Country</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+<span class="n">ar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">userByCountry</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Users&#39;</span><span class="p">])</span>
 <span class="n">ar</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -14352,7 +14375,7 @@ Participants from Arabic countries:1342 out of 88883
 <div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ar</span><span class="p">[</span><span class="s1">&#39;Percentage&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">ar</span><span class="o">.</span><span class="n">Users</span><span class="o">/</span><span class="n">ar</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ar</span><span class="p">[</span><span class="s1">&#39;Percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">Users</span><span class="o">/</span><span class="n">ar</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -14406,54 +14429,18 @@ Participants from Arabic countries:1342 out of 88883
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="n">Counter</span><span class="p">(</span><span class="n">Arabic</span><span class="o">.</span><span class="n">JobSat</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1"> : {round((v/Arabic.shape[0])*100,2)}%&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>nan : 38.97%
-Slightly satisfied : 19.52%
-Very satisfied : 12.74%
-Slightly dissatisfied : 11.85%
-Neither satisfied nor dissatisfied : 9.31%
-Very dissatisfied : 7.6%
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">salaryconverted</span><span class="p">):</span>
-    <span class="c1">#Get the mean of thw Age for each employment status </span>
-    <span class="n">g</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="n">salaryconverted</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">salaryconverted</span><span class="p">):</span>
+    <span class="c1"># Get the average income for developers by country</span>
+    <span class="c1"># Get the mean of thw Age for each employment status</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="n">salaryconverted</span><span class="p">]</span><span class="o">.</span>
+    <span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># create a data set containing the mean of the income for each country</span>
-    <span class="n">ArabicCountry</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-    <span class="n">income</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-    <span class="n">new_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Country&#39;</span><span class="p">:</span><span class="n">ArabicCountry</span><span class="p">,</span><span class="s1">&#39;Money&#39;</span><span class="p">:</span><span class="n">income</span><span class="p">})</span>
+    <span class="n">ArabicCountry</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">income</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Country&#39;</span><span class="p">:</span> <span class="n">ArabicCountry</span><span class="p">,</span> <span class="s1">&#39;Money&#39;</span><span class="p">:</span> <span class="n">income</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">new_df</span>
 </pre></div>
 
@@ -14467,7 +14454,8 @@ Very dissatisfied : 7.6%
 <div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y19</span><span class="o">=</span><span class="n">income</span><span class="p">(</span><span class="n">Arabic</span><span class="p">,</span><span class="s1">&#39;ConvertedComp&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># apply the function to y19 arabic developers</span>
+<span class="n">y19</span> <span class="o">=</span> <span class="n">income</span><span class="p">(</span><span class="n">Arabic</span><span class="p">,</span> <span class="s1">&#39;ConvertedComp&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14562,16 +14550,14 @@ Very dissatisfied : 7.6%
 <div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plt_arabic_income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plt_arabic_income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Annual Income </span><span class="se">\&#39;</span><span class="s1">Arabs Countries</span><span class="se">\&#39;</span><span class="s1"> &#39;</span><span class="o">+</span><span class="n">year</span><span class="p">)</span>
-   
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Country</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">Money</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Country</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Money</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Income&#39;</span><span class="o">+</span><span class="n">year</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
-    
 </pre></div>
 
     </div>
