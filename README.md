@@ -1,14 +1,16 @@
 # stackoverflow2019
 Every year Stackoverflow performs a survey for developers all around the world.  I will do some analysis for the 2019 survey, regarding most programming languages, the most desired languages and finally do some analysis on developers from Arabic countries and show which country participated and Total income for those countries
 
-
-#Link to the article 
+</br>
+<b>#Link to the article </b></br>
 https://medium.com/@mobahhari/scartch-the-surface-in-stackoverflow-users-survey-in-2019-9e0b00d24988
 
 
-Libraries Used:
-Counter and defaultdict from collections libraru
-pandas Library #To enigneer data
+<b>Libraries Used:</b></br>
+Counter and defaultdict from collections libraru</br>
+pandas Library #To enigneer data</br>
+import matplotlib.pyplot as plt</br>
 
-import matplotlib.pyplot as plt
-In this notebook I didn't preprocess the data in the matter of drop nan value, since the columns I worked with doesn't get effected by duplicated nor nan values.
+
+In this notebook I didn't preprocess the data in the matter of drop nan value,
+</br>since the columns I worked with doesn't get effected by duplicated nor nan values.
