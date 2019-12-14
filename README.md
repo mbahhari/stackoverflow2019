@@ -29,11 +29,9 @@ For the last question, a sub dataset created from the main dataset filtered by c
 Plotting the new two datasets (current_lang,desired_lang) and perform analysis in these two datasets.
 ### Question2 : What are the most languses are the developers work with and want to continue work with next year.
 Plotting the dataset created from the dictionary match
-`match dictionary is a result of counting each language occured in both rows
-match = dict()
-for lang in current_lang.Language:
-    match[lang] = (newdf.LanguageWorkedWith.str.contains(lang) &
-                   newdf.LanguageDesireNextYear.str.contains(lang)).sum()`
+`match dictionary is a result of counting each language occured in both rows`
+### Question 3 : What are the most paid in Arabic countries. 
+Plotting the dataset regading ConvertedComp ' Anaula income in USD'. 
 
 
   
