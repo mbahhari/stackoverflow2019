@@ -14,7 +14,26 @@ Every year Stackoverflow performs a survey for developers all around the world. 
 ## CRISP-DM
 * This analysis will performed on stack overflow developers survey in 2019. This survey holds a large amount of informations regarding the developers languages, working status, professional or hobiests, Incomes etc... . 
 * The dataset contains a lot of nan values. Regarding the first two questions out of three focusing in two columns (LanguageWorkedWith, LanguageDesireNextYear].
-** first I changed name of c language to CLanguage and Java to JLanguage as these two languages has similar name with first part of other languages, 
-** split ecah language for each row to columns.
-** Drop nan values in each row 
+</br> first I changed name of c language to CLanguage and Java to JLanguage as these two languages has similar name with first part of other languages, 
+</br> split ecah language for each row to columns.
+</br> Drop nan values in each row 
+<br> create a dataset contains (Languages,Users) 
+
+The second question required to count each language occured in both two columns row by row.
+</br> 
+For the last question, a sub dataset created from the main dataset filtered by country of the developrs [Arabic countries] 
+[Saudi Arabia','Egypt','Bahrain','Jordan','Qatar','Syrian Arab Republic','Yemen','United Arab Emirates','Kuwait','Tunisia','Morocco','Algeria','Libyan Arab Jamahiriya','Oman','Lebanon','Iraq']]
+
+* Evaluating 
+### Question 1 : What are the most language used by the developers, and what are the most desired languages to be work with next year
+Plotting the new two datasets (current_lang,desired_lang) and perform analysis in these two datasets.
+### Question2 : What are the most languses are the developers work with and want to continue work with next year.
+Plotting the dataset created from the dictionary match
+'match dictionary is a result of counting each language occured in both rows'
+'match = dict()
+for lang in current_lang.Language:
+    match[lang] = (newdf.LanguageWorkedWith.str.contains(lang) &
+                   newdf.LanguageDesireNextYear.str.contains(lang)).sum()'
+
+
   
