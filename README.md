@@ -6,8 +6,8 @@ Every year Stackoverflow performs a survey for developers all around the world. 
 ) </br>
 
 
-<b>Libraries Used:</b></br>
-Counter and defaultdict from collections libraru</br>
-pandas Library #To enigneer data</br>
-import matplotlib.pyplot as plt</br>
+## Libraries Used:
+> Counter and defaultdict from collections libraru</br>
+> pandas Library #To enigneer data</br>
+> import matplotlib.pyplot as plt</br>
 
