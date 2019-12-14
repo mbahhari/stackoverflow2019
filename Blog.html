@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
@@ -13123,7 +13122,6 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 
@@ -13467,7 +13465,8 @@ memory usage: 3.4 MB
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">languages</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;create a function to get all the languages that usres used or desired,</span>
-<span class="sd">    to work with and remove all na values &#39;&#39;&#39;</span>
+<span class="sd">    to work with and remove all na values </span>
+<span class="sd">    df argument : refer to the dataset that will get all language from and create a new dataset from&#39;&#39;&#39;</span>
     <span class="n">lang</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
@@ -13688,7 +13687,9 @@ memory usage: 3.4 MB
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_lang</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Create a fucntion to plot the languages,</span>
-<span class="sd">   and apply them on worked with or desired to work with&#39;&#39;&#39;</span>
+<span class="sd">   and apply them on worked with or desired to work with,</span>
+<span class="sd">   df argument refers to the dataset that will be blotte,</span>
+<span class="sd">   title argument refers to the title of the plot&#39;&#39;&#39;</span>
     <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span> <span class="s1">&#39;teal&#39;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
@@ -14433,8 +14434,11 @@ Participants from Arabic countries:1342 out of 88883
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">salaryconverted</span><span class="p">):</span>
-    <span class="c1"># Get the average income for developers by country</span>
-    <span class="c1"># Get the mean of thw Age for each employment status</span>
+    <span class="sd">&#39;&#39;&#39; Get the average income for developers by country,</span>
+<span class="sd">        df argument refers to the dataset that will get data from,</span>
+<span class="sd">        salaryconverted is the column which will get the salary,</span>
+<span class="sd">        from the df&#39;&#39;&#39;</span>
+
     <span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="n">salaryconverted</span><span class="p">]</span><span class="o">.</span>
     <span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># create a data set containing the mean of the income for each country</span>
@@ -14551,6 +14555,8 @@ Participants from Arabic countries:1342 out of 88883
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plt_arabic_income</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;df argument refers to the dataset the will be plotter,</span>
+<span class="sd">        year arguments refer to the year of survey&#39;&#39;&#39;</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
